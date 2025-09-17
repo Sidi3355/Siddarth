@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Platform - Siddarth Oruganti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #6b7280;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+        }
+
+        /* Project Header */
+        .project-header {
+            padding: 100px 0 40px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b7280;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #2563eb;
+        }
+
+        .project-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .live-demo-btn {
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s ease;
+            position: absolute;
+            top: 100px;
+            right: 20px;
+        }
+
+        .live-demo-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Project Gallery */
+        .project-gallery {
+            margin: 3rem 0;
+        }
+
+        .gallery-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-nav:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: #2563eb;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .column h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .column p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        /* Features List */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 0.5rem 0;
+        }
+
+        .feature-bullet {
+            width: 8px;
+            height: 8px;
+            background: #2563eb;
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Technologies Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 12px 16px;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Code Block */
+        .code-section {
+            background: #1f2937;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .code-header {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .code-block {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #e5e7eb;
+        }
+
+        .code-keyword { color: #60a5fa; }
+        .code-string { color: #34d399; }
+        .code-comment { color: #9ca3af; }
+        .code-function { color: #fbbf24; }
+
+        /* Lessons Learned */
+        .lessons-list {
+            margin: 2rem 0;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 0.75rem 0;
+        }
+
+        .lesson-check {
+            width: 20px;
+            height: 20px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Future Improvements */
+        .improvements-list {
+            margin: 2rem 0;
+        }
+
+        .improvement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 0.75rem 0;
+        }
+
+        .improvement-bullet {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #f9fafb;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .cta-text {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #2563eb;
+            padding: 12px 24px;
+            border: 2px solid #2563eb;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .live-demo-btn {
+                position: static;
+                margin-top: 1rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">SO</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="goBack()">Home</a></li>
+                <li><a href="#" onclick="goBack()">About</a></li>
+                <li><a href="#" onclick="goBack()">Projects</a></li>
+                <li><a href="#" onclick="goBack()">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <a href="C:\Users\sidi0\OneDrive - qerdp.co.uk\New folder\modern_portfolio.html" class="back-link">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Portfolio
+            </a>
+            <a href="#" class="live-demo-btn">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7z"/>
+                </svg>
+                Live Demo
+            </a>
+            <h1 class="project-title">E-Commerce Platform</h1>
+            <p class="project-subtitle">Full-stack e-commerce solution with React, Node.js, and Stripe integration. Features include user authentication, product catalog, and order management.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Stripe</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Gallery -->
+    <section class="project-gallery">
+        <div class="container">
+            <div class="gallery-container">
+                <div class="gallery-image" id="galleryImage" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 900 500%22><rect fill=%22%23f59e0b%22 width=%22900%22 height=%22500%22/><rect fill=%22%23000%22 x=%22200%22 y=%22150%22 width=%22300%22 height=%22180%22 rx=%2210%22/><rect fill=%22%23374151%22 x=%22220%22 y=%22170%22 width=%22260%22 height=%22140%22 rx=%225%22/><text x=%22350%22 y=%22240%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22 font-size=%2218%22>Shopping Cart</text><circle fill=%22%23ef4444%22 cx=%22700%22 cy=%22200%22 r=%2240%22/><text x=%22700%22 y=%22210%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22>🛒</text></svg>')"></div>
+                <button class="gallery-nav prev" onclick="changeImage(-1)">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                    </svg>
+                </button>
+                <button class="gallery-nav next" onclick="changeImage(1)">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="gallery-dots">
+                <span class="dot active" onclick="currentImage(1)"></span>
+                <span class="dot" onclick="currentImage(2)"></span>
+                <span class="dot" onclick="currentImage(3)"></span>
+                <span class="dot" onclick="currentImage(4)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Project Overview</h2>
+            <p class="section-text">
+                A comprehensive e-commerce platform built from the ground up with modern web technologies. This project showcases full-stack development skills, including secure payment processing, user authentication, inventory management, and responsive design. The platform supports multiple user roles, real-time inventory updates, and comprehensive order tracking.
+            </p>
+
+            <div class="two-column">
+                <div class="column">
+                    <h3>The Challenge</h3>
+                    <p>Building a secure, scalable e-commerce platform that handles real money transactions while providing an excellent user experience across all devices. The main challenges included implementing secure payment processing, managing complex state across the application, and ensuring the platform could handle concurrent users and transactions.</p>
+                </div>
+                <div class="column">
+                    <h3>The Solution</h3>
+                    <p>I architected a full-stack solution using React for the frontend and Node.js with Express for the backend. MongoDB was chosen for its flexibility in handling product catalogs with varying attributes. Stripe was integrated for secure payment processing, and JWT tokens were implemented for authentication. The application uses Redux for state management and implements real-time updates using WebSocket connections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>User authentication and authorization with JWT</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Product catalog with advanced search and filtering</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Shopping cart with persistent storage</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Secure checkout process with Stripe integration</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Order tracking and history</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Admin dashboard for inventory management</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Real-time inventory updates</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Responsive design optimized for all devices</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Email notifications for order confirmations</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <span>Customer reviews and ratings system</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Used -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Technologies Used</h2>
+            <div class="tech-grid">
+                <div class="tech-item">React</div>
+                <div class="tech-item">Node.js</div>
+                <div class="tech-item">Express</div>
+                <div class="tech-item">MongoDB</div>
+                <div class="tech-item">Stripe API</div>
+                <div class="tech-item">JWT</div>
+                <div class="tech-item">Redux</div>
+                <div class="tech-item">Socket.io</div>
+                <div class="tech-item">Tailwind CSS</div>
+                <div class="tech-item">Nodemailer</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Highlights -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Code Highlights</h2>
+            <div class="code-section">
+                <div class="code-header">Stripe Payment Integration</div>
+                <div class="code-block">
+<span class="code-keyword">const</span> stripe = <span class="code-function">require</span>(<span class="code-string">'stripe'</span>)(process.env.STRIPE_SECRET_KEY);
+
+<span class="code-keyword">const</span> <span class="code-function">createPaymentIntent</span> = <span class="code-keyword">async</span> (req, res) => {
+  <span class="code-keyword">try</span> {
+    <span class="code-keyword">const</span> { amount, currency = <span class="code-string">'usd'</span> } = req.body;
+
+    <span class="code-keyword">const</span> paymentIntent = <span class="code-keyword">await</span> stripe.paymentIntents.<span class="code-function">create</span>({
+      amount: amount * <span class="code-string">100</span>, <span class="code-comment">// Convert to cents</span>
+      currency,
+      metadata: {
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lessons Learned -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Lessons Learned</h2>
+            <div class="lessons-list">
+                <div class="lesson-item">
+                    <div class="lesson-check">
+                        <svg class="icon" viewBox="0 0 24 24" style="width: 12px; height: 12px;">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span>Learned the importance of proper error handling in payment processing</span>
+                </div>
+                <div class="lesson-item">
+                    <div class="lesson-check">
+                        <svg class="icon" viewBox="0 0 24 24" style="width: 12px; height: 12px;">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span>Gained experience with real-time data synchronization using WebSockets</span>
+                </div>
+                <div class="lesson-item">
+                    <div class="lesson-check">
+                        <svg class="icon" viewBox="0 0 24 24" style="width: 12px; height: 12px;">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span>Understood the complexities of managing application state in large React applications</span>
+                </div>
+                <div class="lesson-item">
+                    <div class="lesson-check">
+                        <svg class="icon" viewBox="0 0 24 24" style="width: 12px; height: 12px;">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span>Developed skills in API design and RESTful architecture</span>
+                </div>
+                <div class="lesson-item">
+                    <div class="lesson-check">
+                        <svg class="icon" viewBox="0 0 24 24" style="width: 12px; height: 12px;">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="white"/>
+                        </svg>
+                    </div>
+                    <span>Learned about security best practices for handling sensitive user data</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Improvements -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Future Improvements</h2>
+            <div class="improvements-list">
+                <div class="improvement-item">
+                    <div class="improvement-bullet"></div>
+                    <span>Implement advanced analytics dashboard for sales tracking</span>
+                </div>
+                <div class="improvement-item">
+                    <div class="improvement-bullet"></div>
+                    <span>Add support for multiple payment methods</span>
+                </div>
+                <div class="improvement-item">
+                    <div class="improvement-bullet"></div>
+                    <span>Integrate with third-party logistics for shipping</span>
+                </div>
+                <div class="improvement-item">
+                    <div class="improvement-bullet"></div>
+                    <span>Add AI-powered product recommendations</span>
+                </div>
+                <div class="improvement-item">
+                    <div class="improvement-bullet"></div>
+                    <span>Implement progressive web app features for offline functionality</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Interested in this project?</h2>
+            <p class="cta-text">Feel free to check out the code, try the live demo, or get in touch to discuss it further.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7z"/>
+                    </svg>
+                    Live Demo
+                </a>
+                <a href="#" onclick="goBack()" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Made with <span style="color: #e74c3c;">❤</span> by Siddarth</p>
+                <p>&copy; 2025 Siddarth Oruganti. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentImageIndex = 1;
+        const totalImages = 4;
+
+        const images = [
+            "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 500'><rect fill='%23f59e0b' width='900' height='500'/><rect fill='%23000' x='200' y='150' width='300' height='180' rx='10'/><rect fill='%23374151' x='220' y='170' width='260' height='140' rx='5'/><text x='350' y='240' text-anchor='middle' fill='white' font-family='monospace' font-size='18'>Shopping Cart</text><circle fill='%23ef4444' cx='700' cy='200' r='40'/><text x='700' y='210' text-anchor='middle' fill='white' font-size='24'>🛒</text></svg>",
+            "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 500'><rect fill='%236366f1' width='900' height='500'/><rect fill='%23111827' x='100' y='100' width='700' height='300' rx='15'/><rect fill='%232563eb' x='120' y='120' width='660' height='60' rx='5'/><text x='450' y='155' text-anchor='middle' fill='white' font-family='monospace' font-size='20'>Product Catalog</text><rect fill='%23374151' x='150' y='220' width='180' height='120' rx='8'/><rect fill='%23374151' x='360' y='220' width='180' height='120' rx='8'/><rect fill='%23374151' x='570' y='220' width='180' height='120' rx='8'/></svg>",
+            "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 500'><rect fill='%2310b981' width='900' height='500'/><rect fill='%23ffffff' x='150' y='100' width='600' height='300' rx='20'/><rect fill='%232563eb' x='200' y='150' width='500' height='50' rx='25'/><text x='450' y='180' text-anchor='middle' fill='white' font-family='monospace' font-size='16'>Secure Checkout</text><rect fill='%23f3f4f6' x='200' y='220' width='240' height='40' rx='8'/><rect fill='%23f3f4f6' x='460' y='220' width='240' height='40' rx='8'/><rect fill='%23f3f4f6' x='200' y='280' width='500' height='40' rx='8'/><text x='450' y='345' text-anchor='middle' fill='%236b7280' font-size='14'>Payment Processing</text></svg>",
+            "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 500'><rect fill='%23dc2626' width='900' height='500'/><rect fill='%23ffffff' x='100' y='50' width='700' height='400' rx='15'/><rect fill='%23111827' x='130' y='80' width='640' height='60' rx='8'/><text x='450' y='115' text-anchor='middle' fill='white' font-family='monospace' font-size='18'>Admin Dashboard</text><rect fill='%23f9fafb' x='150' y='170' width='280' height='200' rx='10'/><rect fill='%23f9fafb' x='470' y='170' width='280' height='200' rx='10'/><text x='290' y='280' text-anchor='middle' fill='%23374151' font-size='14'>Inventory</text><text x='610' y='280' text-anchor='middle' fill='%23374151' font-size='14'>Orders</text></svg>"
+        ];
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex > totalImages) currentImageIndex = 1;
+            if (currentImageIndex < 1) currentImageIndex = totalImages;
+            updateGallery();
+        }
+
+        function currentImage(index) {
+            currentImageIndex = index;
+            updateGallery();
+        }
+
+        function updateGallery() {
+            const galleryImage = document.getElementById('galleryImage');
+            const dots = document.querySelectorAll('.dot');
+            
+            galleryImage.style.backgroundImage = `url('${images[currentImageIndex - 1]}')`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentImageIndex - 1);
+            });
+        }
+
+        function goBack() {
+            // In a real implementation, this would navigate back to the portfolio
+            alert('Navigating back to portfolio...');
+        }
+
+        // Auto-play gallery
+        setInterval(() => {
+            changeImage(1);
+        }, 5000);
+    </script>
+</body>
+</html>
