@@ -616,38 +616,38 @@
         <div class="container">
             <h2 class="section-title">Code Highlights</h2>
             <div class="code-section">
-                <div class="code-header">Stripe Payment Integration</div>
+                <div class="code-header">LSTM Classifier</div>
                <div class="code-block">
-<span class="code-keyword">class</span> <span class="code-class">ImprovedLSTMAutoencoder</span>(<span class="code-class">nn.Module</span>):
-    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, input_dim=<span class="code-number">4</span>, hidden_dim=<span class="code-number">64</span>, num_layers=<span class="code-number">2</span>, dropout=<span class="code-number">0.1</span>):
-        <span class="code-function">super</span>().<span class="code-function">__init__</span>()
-        <span class="code-keyword">self</span>.encoder = <span class="code-class">nn.LSTM</span>(
-            input_dim, hidden_dim, num_layers,
-            batch_first=<span class="code-keyword">True</span>, dropout=dropout, bidirectional=<span class="code-keyword">True</span>
-        )
-        <span class="code-keyword">self</span>.bottleneck = <span class="code-class">nn.Sequential</span>(
-            <span class="code-class">nn.Linear</span>(hidden_dim * <span class="code-number">2</span>, hidden_dim),
-            <span class="code-class">nn.ReLU</span>(),
-            <span class="code-class">nn.Dropout</span>(dropout),
-            <span class="code-class">nn.Linear</span>(hidden_dim, hidden_dim // <span class="code-number">2</span>),
-            <span class="code-class">nn.ReLU</span>(),
-            <span class="code-class">nn.Linear</span>(hidden_dim // <span class="code-number">2</span>, hidden_dim)
-        )
-        <span class="code-keyword">self</span>.decoder = <span class="code-class">nn.LSTM</span>(
-            hidden_dim, hidden_dim, num_layers,
-            batch_first=<span class="code-keyword">True</span>, dropout=dropout
-        )
-        <span class="code-keyword">self</span>.output_layer = <span class="code-class">nn.Linear</span>(hidden_dim, input_dim)
-
-    <span class="code-keyword">def</span> <span class="code-function">forward</span>(<span class="code-keyword">self</span>, x):
-        batch_size, seq_len, _ = x.shape
-        encoder_out, _ = <span class="code-keyword">self</span>.encoder(x)
-        final_representation = encoder_out[:, <span class="code-number">-1</span>, :]
-        compressed = <span class="code-keyword">self</span>.bottleneck(final_representation)
-        decoder_input = compressed.<span class="code-function">unsqueeze</span>(<span class="code-number">1</span>).<span class="code-function">repeat</span>(<span class="code-number">1</span>, seq_len, <span class="code-number">1</span>)
-        decoder_out, _ = <span class="code-keyword">self</span>.decoder(decoder_input)
-        reconstructed = <span class="code-keyword">self</span>.output_layer(decoder_out)
-        <span class="code-keyword">return</span> reconstructed, compressed
+<span class="code-keyword">class</span> <span class="code-class">ImprovedLSTMAutoencoder</span>(<span class="code-class">nn.Module</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, input_dim=<span class="code-number">4</span>, hidden_dim=<span class="code-number">64</span>, num_layers=<span class="code-number">2</span>, dropout=<span class="code-number">0.1</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">super</span>().<span class="code-function">__init__</span>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.encoder = <span class="code-class">nn.LSTM</span>(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input_dim, hidden_dim, num_layers,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch_first=<span class="code-keyword">True</span>, dropout=dropout, bidirectional=<span class="code-keyword">True</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.bottleneck = <span class="code-class">nn.Sequential</span>(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Linear</span>(hidden_dim * <span class="code-number">2</span>, hidden_dim),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.ReLU</span>(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Dropout</span>(dropout),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Linear</span>(hidden_dim, hidden_dim // <span class="code-number">2</span>),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.ReLU</span>(),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Linear</span>(hidden_dim // <span class="code-number">2</span>, hidden_dim)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.decoder = <span class="code-class">nn.LSTM</span>(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hidden_dim, hidden_dim, num_layers,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch_first=<span class="code-keyword">True</span>, dropout=dropout<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.output_layer = <span class="code-class">nn.Linear</span>(hidden_dim, input_dim)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">forward</span>(<span class="code-keyword">self</span>, x):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch_size, seq_len, _ = x.shape<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encoder_out, _ = <span class="code-keyword">self</span>.encoder(x)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final_representation = encoder_out[:, <span class="code-number">-1</span>, :]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compressed = <span class="code-keyword">self</span>.bottleneck(final_representation)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decoder_input = compressed.<span class="code-function">unsqueeze</span>(<span class="code-number">1</span>).<span class="code-function">repeat</span>(<span class="code-number">1</span>, seq_len, <span class="code-number">1</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decoder_out, _ = <span class="code-keyword">self</span>.decoder(decoder_input)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reconstructed = <span class="code-keyword">self</span>.output_layer(decoder_out)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> reconstructed, compressed
 </div>
             </div>
         </div>
