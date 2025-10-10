@@ -617,18 +617,38 @@
             <h2 class="section-title">Code Highlights</h2>
             <div class="code-section">
                 <div class="code-header">Stripe Payment Integration</div>
-                <div class="code-block">
-<span class="code-keyword">const</span> stripe = <span class="code-function">require</span>(<span class="code-string">'stripe'</span>)(process.env.STRIPE_SECRET_KEY);
+               <div class="code-block">
+<span class="code-keyword">class</span> <span class="code-class">ImprovedLSTMAutoencoder</span>(<span class="code-class">nn.Module</span>):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, input_dim=<span class="code-number">4</span>, hidden_dim=<span class="code-number">64</span>, num_layers=<span class="code-number">2</span>, dropout=<span class="code-number">0.1</span>):
+        <span class="code-function">super</span>().<span class="code-function">__init__</span>()
+        <span class="code-keyword">self</span>.encoder = <span class="code-class">nn.LSTM</span>(
+            input_dim, hidden_dim, num_layers,
+            batch_first=<span class="code-keyword">True</span>, dropout=dropout, bidirectional=<span class="code-keyword">True</span>
+        )
+        <span class="code-keyword">self</span>.bottleneck = <span class="code-class">nn.Sequential</span>(
+            <span class="code-class">nn.Linear</span>(hidden_dim * <span class="code-number">2</span>, hidden_dim),
+            <span class="code-class">nn.ReLU</span>(),
+            <span class="code-class">nn.Dropout</span>(dropout),
+            <span class="code-class">nn.Linear</span>(hidden_dim, hidden_dim // <span class="code-number">2</span>),
+            <span class="code-class">nn.ReLU</span>(),
+            <span class="code-class">nn.Linear</span>(hidden_dim // <span class="code-number">2</span>, hidden_dim)
+        )
+        <span class="code-keyword">self</span>.decoder = <span class="code-class">nn.LSTM</span>(
+            hidden_dim, hidden_dim, num_layers,
+            batch_first=<span class="code-keyword">True</span>, dropout=dropout
+        )
+        <span class="code-keyword">self</span>.output_layer = <span class="code-class">nn.Linear</span>(hidden_dim, input_dim)
 
-<span class="code-keyword">const</span> <span class="code-function">createPaymentIntent</span> = <span class="code-keyword">async</span> (req, res) => {
-  <span class="code-keyword">try</span> {
-    <span class="code-keyword">const</span> { amount, currency = <span class="code-string">'usd'</span> } = req.body;
-
-    <span class="code-keyword">const</span> paymentIntent = <span class="code-keyword">await</span> stripe.paymentIntents.<span class="code-function">create</span>({
-      amount: amount * <span class="code-string">100</span>, <span class="code-comment">// Convert to cents</span>
-      currency,
-      metadata: {
-                </div>
+    <span class="code-keyword">def</span> <span class="code-function">forward</span>(<span class="code-keyword">self</span>, x):
+        batch_size, seq_len, _ = x.shape
+        encoder_out, _ = <span class="code-keyword">self</span>.encoder(x)
+        final_representation = encoder_out[:, <span class="code-number">-1</span>, :]
+        compressed = <span class="code-keyword">self</span>.bottleneck(final_representation)
+        decoder_input = compressed.<span class="code-function">unsqueeze</span>(<span class="code-number">1</span>).<span class="code-function">repeat</span>(<span class="code-number">1</span>, seq_len, <span class="code-number">1</span>)
+        decoder_out, _ = <span class="code-keyword">self</span>.decoder(decoder_input)
+        reconstructed = <span class="code-keyword">self</span>.output_layer(decoder_out)
+        <span class="code-keyword">return</span> reconstructed, compressed
+</div>
             </div>
         </div>
     </section>
