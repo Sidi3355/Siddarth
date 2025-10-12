@@ -648,37 +648,35 @@
             <div class="code-section">
                 <div class="code-header">LSTM Classifier</div>
                <div class="code-block">
-<span class="code-keyword">class</span> <span class="code-class">ImprovedLSTMAutoencoder</span>(<span class="code-class">nn.Module</span>):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, input_dim=<span class="code-number">4</span>, hidden_dim=<span class="code-number">64</span>, num_layers=<span class="code-number">2</span>, dropout=<span class="code-number">0.1</span>):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">super</span>().<span class="code-function">__init__</span>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.encoder = <span class="code-class">nn.LSTM</span>(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input_dim, hidden_dim, num_layers,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch_first=<span class="code-keyword">True</span>, dropout=dropout, bidirectional=<span class="code-keyword">True</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.bottleneck = <span class="code-class">nn.Sequential</span>(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Linear</span>(hidden_dim * <span class="code-number">2</span>, hidden_dim),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.ReLU</span>(),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Dropout</span>(dropout),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Linear</span>(hidden_dim, hidden_dim // <span class="code-number">2</span>),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.ReLU</span>(),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">nn.Linear</span>(hidden_dim // <span class="code-number">2</span>, hidden_dim)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.decoder = <span class="code-class">nn.LSTM</span>(<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hidden_dim, hidden_dim, num_layers,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch_first=<span class="code-keyword">True</span>, dropout=dropout<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.output_layer = <span class="code-class">nn.Linear</span>(hidden_dim, input_dim)<br>
+<span class="code-keyword">void</span> <span class="code-function">loop</span>(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">digitalWrite</span>(<span class="code-variable">ledPower</span>, <span class="code-constant">LOW</span>); <span class="code-comment">// Turn on the sensor LED</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">delayMicroseconds</span>(<span class="code-variable">samplingTime</span>);<br>
 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">forward</span>(<span class="code-keyword">self</span>, x):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;batch_size, seq_len, _ = x.shape<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encoder_out, _ = <span class="code-keyword">self</span>.encoder(x)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final_representation = encoder_out[:, <span class="code-number">-1</span>, :]<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compressed = <span class="code-keyword">self</span>.bottleneck(final_representation)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decoder_input = compressed.<span class="code-function">unsqueeze</span>(<span class="code-number">1</span>).<span class="code-function">repeat</span>(<span class="code-number">1</span>, seq_len, <span class="code-number">1</span>)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decoder_out, _ = <span class="code-keyword">self</span>.decoder(decoder_input)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reconstructed = <span class="code-keyword">self</span>.output_layer(decoder_out)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> reconstructed, compressed
-</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">voMeasured</span> = <span class="code-function">analogRead</span>(<span class="code-variable">measurePin</span>); <span class="code-comment">// Read the dust sensor</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">delayMicroseconds</span>(<span class="code-variable">deltaTime</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">digitalWrite</span>(<span class="code-variable">ledPower</span>, <span class="code-constant">HIGH</span>); <span class="code-comment">// Turn off the sensor LED</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">delayMicroseconds</span>(<span class="code-variable">sleepTime</span>);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Convert analog reading to voltage</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">calcVoltage</span> = <span class="code-variable">voMeasured</span> * (<span class="code-number">5.0</span> / <span class="code-number">1024.0</span>);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Convert voltage to dust density</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">dustDensity</span> = <span class="code-number">170</span> * <span class="code-variable">calcVoltage</span> - <span class="code-number">0.1</span>;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">Serial</span>.<span class="code-function">print</span>(<span class="code-string">"Dust Density: "</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">Serial</span>.<span class="code-function">print</span>(<span class="code-variable">dustDensity</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-class">Serial</span>.<span class="code-function">println</span>(<span class="code-string">" ug/m3"</span>);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Display dust density on LCD</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">lcd</span>.<span class="code-function">clear</span>();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">lcd</span>.<span class="code-function">setCursor</span>(<span class="code-number">0</span>, <span class="code-number">0</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">lcd</span>.<span class="code-function">print</span>(<span class="code-string">"Dust Density:"</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">lcd</span>.<span class="code-function">setCursor</span>(<span class="code-number">0</span>, <span class="code-number">1</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">lcd</span>.<span class="code-function">print</span>(<span class="code-variable">dustDensity</span>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-variable">lcd</span>.<span class="code-function">print</span>(<span class="code-string">" ug/m3"</span>);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">delay</span>(<span class="code-number">1000</span>);<br>
+}
             </div>
         </div>
     </section>
