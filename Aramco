@@ -1,0 +1,1436 @@
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const AeroDeck = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      title: "Circuit of The Americas",
+      subtitle: "Aerodynamic Design Criteria",
+      type: "title",
+      content: (
+        <div className="text-center space-y-8">
+          <div className="text-6xl font-bold text-red-600">COTA 2025</div>
+          <div className="text-3xl text-gray-700">Three Critical Aerodynamic Pillars</div>
+          <div className="text-xl text-gray-500 mt-12">Engineering Performance for Austin</div>
+        </div>
+      )
+    },
+    {
+      title: "Track Challenge Overview",
+      subtitle: "Why COTA Demands Precision",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-blue-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-3 text-blue-900">The Technical Challenge</h3>
+            <p className="text-gray-700 leading-relaxed">
+              COTA presents one of the most demanding aerodynamic challenges on the calendar. The circuit combines low-speed hairpins, high-speed sweeping corners, and one of the longest straights in Formula 1, all while dealing with significant track surface degradation and bumps.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="text-3xl font-bold text-red-600">80-320</div>
+              <div className="text-sm text-gray-600">kph speed range</div>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="text-3xl font-bold text-red-600">1.2km</div>
+              <div className="text-sm text-gray-600">back straight length</div>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="text-3xl font-bold text-red-600">20</div>
+              <div className="text-sm text-gray-600">total corners</div>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 p-4 rounded-lg">
+            <p className="text-gray-700">
+              <span className="font-bold text-yellow-900">Key Issue:</span> Any aerodynamic setup must perform across extreme variations in speed, load, and track conditions without compromising driver confidence or lap time.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Our Three Pillars",
+      subtitle: "Consolidated Design Framework",
+      type: "content",
+      content: (
+        <div className="space-y-4">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 rounded-lg text-white">
+            <div className="text-2xl font-bold mb-2">1. Downforce Consistency Across Speed Range</div>
+            <div className="text-blue-100">Platform stability from hairpins to high-speed corners</div>
+          </div>
+          
+          <div className="bg-gradient-to-r from-red-600 to-red-700 p-6 rounded-lg text-white">
+            <div className="text-2xl font-bold mb-2">2. Ride Height Robustness</div>
+            <div className="text-red-100">Maintaining performance through track surface challenges</div>
+          </div>
+          
+          <div className="bg-gradient-to-r from-gray-700 to-gray-800 p-6 rounded-lg text-white">
+            <div className="text-2xl font-bold mb-2">3. Drag Efficiency at Race Downforce</div>
+            <div className="text-gray-100">Optimizing the straight-line vs cornering tradeoff</div>
+          </div>
+
+          <div className="mt-8 bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-600 italic">
+              Each pillar represents a consolidation of multiple aerodynamic parameters into a single, measurable design criterion that directly impacts lap time performance.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 1: Downforce Consistency",
+      subtitle: "The Foundation of Predictable Performance",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+            <h3 className="font-bold text-xl mb-3 text-blue-900">What Is Downforce Consistency?</h3>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Downforce consistency measures how stable your aerodynamic platform remains as speed changes. In simple terms: does the car produce proportional downforce at 100 kph as it does at 250 kph? Does the balance between front and rear stay predictable?
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              Inconsistent downforce means the car behaves differently at every corner, forcing the driver to adapt constantly and losing time through unpredictable handling.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-green-50 p-4 rounded-lg">
+              <div className="font-bold text-green-900 mb-2">Good Consistency</div>
+              <div className="text-sm text-gray-700">Car feels planted and predictable. Driver can commit fully to every corner knowing the aerodynamic platform will support them.</div>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="font-bold text-red-900 mb-2">Poor Consistency</div>
+              <div className="text-sm text-gray-700">Car feels nervous or unpredictable. Driver hesitates, loses confidence, and cannot extract maximum performance.</div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border-2 border-blue-200">
+            <h4 className="font-bold text-lg mb-3">Target Specification</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="text-gray-700">Total downforce variation (80-280 kph):</span>
+                <span className="font-bold text-blue-600">&lt;5%</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-700">Aerodynamic balance shift:</span>
+                <span className="font-bold text-blue-600">±1.5%</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-700">Speed range coverage:</span>
+                <span className="font-bold text-blue-600">80-280 kph</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 1: Why It Matters at COTA",
+      subtitle: "Track-Specific Importance",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-yellow-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-3 text-yellow-900">The COTA Challenge</h3>
+            <p className="text-gray-700 leading-relaxed">
+              COTA features extreme speed variations within single laps. Turn 11 is an 80 kph hairpin. Immediately after, Turns 12-15 are medium-high speed. Then back to slow speed at Turns 16-18, before the high-speed final complex. Meanwhile, Sector 1 contains some of the fastest sustained corners on the calendar.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-white p-4 rounded-lg border-l-4 border-red-600">
+              <div className="font-bold mb-2">Sector 1 (Turns 1-9): High-Speed Domain</div>
+              <p className="text-sm text-gray-700">Long straight into uphill braking, then sustained high-speed sweepers at 200-250 kph. Front wing must generate consistent downforce for direction changes without stalling or oscillating.</p>
+            </div>
+            
+            <div className="bg-white p-4 rounded-lg border-l-4 border-blue-600">
+              <div className="font-bold mb-2">Sector 3 (Turns 11-20): Mixed Domain</div>
+              <p className="text-sm text-gray-700">Switches between 80 kph hairpin, 180 kph sweepers, and 100 kph technical sections. The aero platform must support the car across this entire range without the balance shifting unpredictably.</p>
+            </div>
+          </div>
+
+          <div className="bg-blue-900 text-white p-6 rounded-lg">
+            <h4 className="font-bold text-lg mb-3">Performance Impact</h4>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-start">
+                <span className="mr-3">✓</span>
+                <span>Sector 1 within 0.15s of fastest car validates high-speed performance</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">✓</span>
+                <span>Competitive Turn 11 exit speed validates low-speed platform stability</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">✓</span>
+                <span>Driver confidence through mixed-speed Sector 3 ensures consistent pace</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 1: Technical Breakdown",
+      subtitle: "What We're Actually Measuring",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-3">Components of This Criterion</h3>
+            <p className="text-gray-700 mb-4">
+              This pillar consolidates three distinct but related aerodynamic parameters:
+            </p>
+            
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                <div className="font-bold text-blue-900 mb-2">Front Downforce Consistency</div>
+                <p className="text-sm text-gray-700 mb-2">
+                  The front wing must remain attached and generate stable downforce across all speeds. Flow separation at low speeds or excessive loading at high speeds both cause inconsistency.
+                </p>
+                <div className="text-xs text-gray-500">
+                  Measured via: CFD pressure maps, flow visualization, wind tunnel force curves
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                <div className="font-bold text-blue-900 mb-2">Aerodynamic Balance Range</div>
+                <p className="text-sm text-gray-700 mb-2">
+                  The percentage of total downforce acting on the front axle should remain within a narrow window. If balance shifts significantly with speed, the car becomes unpredictable.
+                </p>
+                <div className="text-xs text-gray-500">
+                  Measured via: Front/rear wing adjustment sensitivity, CFD balance maps
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                <div className="font-bold text-blue-900 mb-2">Minimum Speed Downforce Floor</div>
+                <p className="text-sm text-gray-700 mb-2">
+                  Modern ground effect floors can lose effectiveness dramatically at low speeds. Maintaining at least 40% of maximum downforce at 80 kph ensures the car remains stable in slow corners.
+                </p>
+                <div className="text-xs text-gray-500">
+                  Measured via: CFD velocity fields under floor, pressure distribution analysis
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-600 text-white p-4 rounded-lg">
+            <div className="font-bold mb-2">Why Consolidate?</div>
+            <p className="text-sm">
+              These three parameters all affect the same outcome: whether the car feels consistent to the driver across different speeds. By grouping them, we create a single, actionable design target rather than optimizing three separate (and potentially conflicting) goals.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 2: Ride Height Robustness",
+      subtitle: "Surviving COTA's Brutal Surface",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-600">
+            <h3 className="font-bold text-xl mb-3 text-red-900">What Is Ride Height Robustness?</h3>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Ride height robustness measures how tolerant your aerodynamic package is to changes in the car's height above the ground. Ground effect cars generate massive downforce by accelerating air underneath the floor, but this is extremely sensitive to ride height changes.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              When a car hits bumps, uses fuel (getting lighter), or experiences suspension compression, the ride height changes. A robust aero package maintains performance despite these variations. A fragile package loses downforce catastrophically or becomes unpredictable.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border-2 border-gray-200">
+            <h4 className="font-bold text-lg mb-4">The Physics Problem</h4>
+            <div className="space-y-3 text-sm text-gray-700">
+              <div className="flex items-start">
+                <span className="font-bold mr-3 text-red-600">•</span>
+                <span><span className="font-bold">Too Low:</span> Floor contacts track surface (plank wear), or edge wing stalls causing sudden downforce loss and potential porpoising</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-bold mr-3 text-red-600">•</span>
+                <span><span className="font-bold">Too High:</span> Gap under floor increases, reducing ground effect dramatically. Can lose 2-3% of total downforce per millimeter</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-bold mr-3 text-red-600">•</span>
+                <span><span className="font-bold">Variable:</span> Inconsistent ride height through corners means downforce constantly changing, making car unpredictable</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-red-900 text-white p-6 rounded-lg">
+            <h4 className="font-bold text-lg mb-3">Target Specification</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Downforce loss per 1mm ride height increase:</span>
+                <span className="font-bold">&lt;0.8%</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Operational heave range:</span>
+                <span className="font-bold">8-12mm</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Floor stall margin:</span>
+                <span className="font-bold">Zero events</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 2: Why COTA Is Critical",
+      subtitle: "Track Surface Reality",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-yellow-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-3 text-yellow-900">COTA's Notorious Surface</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Circuit of The Americas is built on expansive clay soil that shifts with temperature and moisture. This has created severe bumps and undulations, particularly in key braking zones and corner entries. The surface continues to deteriorate each year despite resurfacing efforts.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="font-bold text-red-900 mb-2">Turn 1</div>
+              <p className="text-sm text-gray-700">Uphill braking zone with severe bumps. Cars become unsettled under maximum load, risking floor contact or aerodynamic stall.</p>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="font-bold text-red-900 mb-2">Turn 9</div>
+              <p className="text-sm text-gray-700">Fast left-hander with compression and bumps on entry. Floor must remain effective through rapid ride height changes.</p>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="font-bold text-red-900 mb-2">Turns 16-18</div>
+              <p className="text-sm text-gray-700">Technical section with poor surface quality. Drivers report constant unsettled feeling through this complex.</p>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="font-bold text-red-900 mb-2">Back Straight</div>
+              <p className="text-sm text-gray-700">Bumps at high speed can cause momentary ride height variations affecting top speed and stability.</p>
+            </div>
+          </div>
+
+          <div className="bg-red-900 text-white p-6 rounded-lg">
+            <h4 className="font-bold text-lg mb-3">The Competitive Reality</h4>
+            <p className="text-sm mb-3">
+              Teams that cannot manage ride height variations face impossible choices:
+            </p>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-start">
+                <span className="mr-3">→</span>
+                <span>Run car high: Lose 3-5% downforce everywhere, surrendering 0.3-0.5s per lap</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">→</span>
+                <span>Run car low: Risk floor damage, porpoising, and unpredictable handling</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">→</span>
+                <span>Compromise setup: Give away performance in multiple areas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 2: Technical Breakdown",
+      subtitle: "Component Parameters",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-3">Three Integrated Elements</h3>
+            
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
+                <div className="font-bold text-red-900 mb-2">Ride Height Sensitivity</div>
+                <p className="text-sm text-gray-700 mb-3">
+                  Quantifies how much downforce is lost as the car rises from its optimal height. Modern floors can be extremely sensitive, losing 1-2% downforce per millimeter. Our target of &lt;0.8% requires sophisticated floor geometry and edge wing design.
+                </p>
+                <div className="bg-red-50 p-3 rounded text-xs">
+                  <div className="font-bold mb-1">Design Solutions:</div>
+                  <div className="text-gray-700">• Diffuser throat geometry optimized for ride height range</div>
+                  <div className="text-gray-700">• Edge wing profiles with gradual stall characteristics</div>
+                  <div className="text-gray-700">• Floor strakes positioned to maintain vortex strength</div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
+                <div className="font-bold text-red-900 mb-2">Diffuser Performance Robustness</div>
+                <p className="text-sm text-gray-700 mb-3">
+                  The diffuser is the primary downforce generator in ground effect cars. It must contribute at least 35% of rear downforce while tolerating pitch changes (nose up/down) of ±0.5 degrees without flow separation.
+                </p>
+                <div className="bg-red-50 p-3 rounded text-xs">
+                  <div className="font-bold mb-1">Design Solutions:</div>
+                  <div className="text-gray-700">• Progressive diffuser ramp angles preventing sudden stall</div>
+                  <div className="text-gray-700">• Kicker elements stabilizing flow reattachment</div>
+                  <div className="text-gray-700">• Beam wing interaction optimized across pitch range</div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
+                <div className="font-bold text-red-900 mb-2">Front Wing Loading</div>
+                <p className="text-sm text-gray-700 mb-3">
+                  Front wing must generate sufficient downforce coefficient (Cl,f ≥1.4) for Turn 1 braking stability while remaining effective when ride height changes through bumps. Must not create understeer in slow corners where mechanical grip dominates.
+                </p>
+                <div className="bg-red-50 p-3 rounded text-xs">
+                  <div className="font-bold mb-1">Design Solutions:</div>
+                  <div className="text-gray-700">• Multi-element configuration with progressive stall margin</div>
+                  <div className="text-gray-700">• Endplate vortex management reducing wake sensitivity</div>
+                  <div className="text-gray-700">• Flap angle optimization across operational envelope</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-red-600 text-white p-4 rounded-lg">
+            <div className="font-bold mb-2">Success Metric</div>
+            <p className="text-sm">
+              Consistent sector times across fuel loads. If times degrade as fuel burns off (ride height increases), the aero package lacks robustness. Target: &lt;0.05s lap time variation across 50kg fuel range.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 3: Drag Efficiency",
+      subtitle: "Optimizing the Speed-Downforce Tradeoff",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gray-700 text-white p-6 rounded-lg border-l-4 border-gray-900">
+            <h3 className="font-bold text-xl mb-3">What Is Drag Efficiency?</h3>
+            <p className="leading-relaxed mb-4">
+              Drag efficiency is the fundamental aerodynamic tradeoff: how much straight-line speed are you sacrificing to generate cornering downforce? It's measured as the lift-to-drag ratio (L/D) - how many units of downforce you get per unit of drag.
+            </p>
+            <p className="leading-relaxed">
+              A high L/D ratio means you can have both good cornering speed AND competitive straight-line speed. A low L/D ratio forces you to choose: either be fast in corners but slow on straights, or vice versa.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-green-50 p-4 rounded-lg">
+              <div className="font-bold text-green-900 mb-2">Efficient Configuration</div>
+              <p className="text-sm text-gray-700">Clean airflow, minimal separation, optimized wing profiles. Generates maximum downforce for minimum drag penalty.</p>
+              <div className="text-2xl font-bold text-green-600 mt-3">L/D ≥ 3.2</div>
+            </div>
+            <div className="bg-red-50 p-4 rounded-lg">
+              <div className="font-bold text-red-900 mb-2">Inefficient Configuration</div>
+              <p className="text-sm text-gray-700">Separated flow, excessive cooling drag, poorly managed tire wakes. Every unit of downforce costs excessive speed.</p>
+              <div className="text-2xl font-bold text-red-600 mt-3">L/D &lt; 2.8</div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border-2 border-gray-300">
+            <h4 className="font-bold text-lg mb-3">Why This Matters Strategically</h4>
+            <p className="text-sm text-gray-700 mb-3">
+              Drag efficiency determines your race strategy options. High efficiency means:
+            </p>
+            <div className="space-y-2 text-sm text-gray-700">
+              <div className="flex items-start">
+                <span className="mr-3 text-green-600">✓</span>
+                <span>Can defend position on straights while still being fast through corners</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3 text-green-600">✓</span>
+                <span>Can overtake into Turn 12 hairpin without giving position back on back straight</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3 text-green-600">✓</span>
+                <span>Flexible strategy - can run higher downforce without severe time loss</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-900 text-white p-6 rounded-lg">
+            <h4 className="font-bold text-lg mb-3">Target Specification</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Lift-to-drag ratio at race config:</span>
+                <span className="font-bold text-green-400">≥3.2</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Back straight trap speed:</span>
+                <span className="font-bold text-green-400">320+ kph</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Rear stability in crosswinds:</span>
+                <span className="font-bold text-green-400">±8° yaw</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 3: The COTA Equation",
+      subtitle: "Back Straight vs Sector 1",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-yellow-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-3 text-yellow-900">The Strategic Dilemma</h3>
+            <p className="text-gray-700 leading-relaxed">
+              COTA's 1.2km back straight is one of the longest in F1, with cars reaching 320-330 kph. But Sector 1 contains some of the most demanding high-speed corners on the calendar. Every kilogram of downforce helps in Sector 1 but costs speed on the straight.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border-2 border-gray-300">
+            <h4 className="font-bold text-lg mb-4">The Numbers</h4>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between bg-blue-50 p-4 rounded">
+                <div>
+                  <div className="font-bold">More Wing (High Downforce)</div>
+                  <div className="text-sm text-gray-600">Faster in Sector 1, slower on straight</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-blue-600">-8 kph</div>
+                  <div className="text-xs text-gray-500">trap speed penalty</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between bg-red-50 p-4 rounded">
+                <div>
+                  <div className="font-bold">Less Wing (Low Downforce)</div>
+                  <div className="text-sm text-gray-600">Faster on straight, slower in Sector 1</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-red-600">-0.3s</div>
+                  <div className="text-xs text-gray-500">Sector 1 penalty</div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between bg-green-50 p-4 rounded border-2 border-green-500">
+                <div>
+                  <div className="font-bold">Optimal Efficiency (L/D ≥3.2)</div>
+                  <div className="text-sm text-gray-600">Balanced performance everywhere</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-green-600">Best Lap</div>
+                  <div className="text-xs text-gray-500">320+ kph AND fast S1</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-700 text-white p-6 rounded-lg">
+            <h4 className="font-bold text-lg mb-3">Race Strategy Implications</h4>
+            <p className="text-sm mb-3">
+              High drag efficiency unlocks strategic flexibility:
+            </p>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-start">
+                <span className="mr-3">→</span>
+                <span>Can defend into Turn 12 hairpin knowing you won't lose position back on the straight</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">→</span>
+                <span>Alternative passing opportunities beyond just DRS on back straight</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">→</span>
+                <span>Can run higher downforce for tire management without strategic penalty</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Pillar 3: Technical Breakdown",
+      subtitle: "Four Key Components",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-3">Integrated Efficiency Parameters</h3>
+            
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-lg border-l-4 border-gray-600">
+                <div className="font-bold text-gray-900 mb-2">Core L/D Ratio</div>
+                <p className="text-sm text-gray-700 mb-3">
+                  The fundamental efficiency metric. Target ≥3.2 means for every unit of drag, you generate at least 3.2 units of downforce. Achieved through clean flow management, optimized wing profiles, and minimal separation.
+                </p>
+                <div className="bg-gray-50 p-3 rounded text-xs">
+                  <div className="font-bold mb-1">Key Design Areas:</div>
+                  <div className="text-gray-700">• Wing profile optimization (avoiding excessive camber)</div>
+                  <div className="text-gray-700">• Body shaping to minimize pressure drag</div>
+                  <div className="text-gray-700">• Floor/diffuser efficiency maximization</div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-gray-600">
+                <div className="font-bold text-gray-900 mb-2">Rear Stability in Yaw</div>
+                <p className="text-sm text-gray-700 mb-3">
+                  Texas wind is unpredictable. The rear wing and diffuser must maintain stable downforce with ±8° of yaw angle (crosswind). Poor yaw stability forces conservative setup, sacrificing straight-line speed for safety margin.
+                </p>
+                <div className="bg-gray-50 p-3 rounded text-xs">
+                  <div className="font-bold mb-1">Design Solutions:</div>
+                  <div className="text-gray-700">• Rear wing endplate geometry managing crosswind flow</div>
+                  <div className="text-gray-700">• Diffuser sidewall vortex generators stabilizing expansion</div>
+                  <div className="text-gray-700">• Beam wing contribution reducing rear wing sensitivity</div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-gray-600">
+                <div className="font-bold text-gray-900 mb-2">Tire Wake Management</div>
+                <p className="text-sm text-gray-700 mb-3">
+                  Front tire wakes create turbulent, high-drag air that hits the rear wing. Poor wake management can cost 15% rear wing efficiency. Bargeboards and floor edges must channel this air away from critical surfaces.
+                </p>
+                <div className="bg-gray-50 p-3 rounded text-xs">
+                  <div className="font-bold mb-1">Design Solutions:</div>
+                  <div className="text-gray-700">• Floor edge wing vortices pushing tire wake outboard</div>
+                  <div className="text-gray-700">• Sidepod undercut directing clean air to rear wing</div>
+                  <div className="text-gray-700">• Front wing Y250 vortex management</div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-gray-600">
+                <div className="font-bold text-gray-900 mb-2">Cooling Drag Budget</div>
+                <p className="text-sm text-gray-700 mb-3">
+                  Austin temperatures (25-35°C) require significant cooling. Every square centimeter of radiator inlet creates drag. Target: keep cooling drag below 8% of total drag through efficient heat exchanger sizing and bodywork integration.
+                </p>
+                <div className="bg-gray-50 p-3 rounded text-xs">
+                  <div className="font-bold mb-1">Design Solutions:</div>
+                  <div className="text-gray-700">• Optimized inlet sizing (not oversized for worst case)</div>
+                  <div className="text-gray-700">• Efficient radiator exit management reducing base drag</div>
+                  <div className="text-gray-700">• Sidepod shaping to minimize separation from outlets</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-800 text-white p-4 rounded-lg">
+            <div className="font-bold mb-2">Validation Metric</div>
+            <p className="text-sm">
+              Within 8 kph of fastest trap speed while maintaining top-3 Sector 1 performance. This proves the package hasn't sacrificed one for the other.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Design Priorities",
+      subtitle: "Ranking for COTA Specifically",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-8 rounded-lg">
+            <div className="text-4xl font-bold mb-2">1. Ride Height Robustness</div>
+            <div className="text-xl text-red-100 mb-4">Non-Negotiable Foundation</div>
+            <p className="leading-relaxed">
+              COTA's surface will expose any ride height sensitivity. This must be solved first. Without robustness here, neither downforce consistency nor drag efficiency matter - the car will be unpredictable and potentially undriveable.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 rounded-lg">
+            <div className="text-4xl font-bold mb-2">2. Downforce Consistency</div>
+            <div className="text-xl text-blue-100 mb-4">Competitive Performance</div>
+            <p className="leading-relaxed">
+              Sector 1 is where races are won and lost at COTA. You cannot give away time in the high-speed corners. Once ride height is solved, consistency across speed range becomes the primary performance differentiator.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-r from-gray-600 to-gray-700 text-white p-8 rounded-lg">
+            <div className="text-4xl font-bold mb-2">3. Drag Efficiency</div>
+            <div className="text-xl text-gray-100 mb-4">Strategic Enabler</div>
+            <p className="leading-relaxed">
+              Important for race strategy and defending/attacking, but less critical than the other two. Alternative passing opportunities (Turn 12, Turn 1) mean straight-line speed disadvantage can be managed strategically.
+            </p>
+          </div>
+
+          <div className="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500 mt-8">
+            <h4 className="font-bold text-lg mb-3 text-yellow-900">The Reality Check</h4>
+            <p className="text-gray-700">
+              Teams that nail all three pillars will be fighting for podiums. Teams that compromise on ride height robustness will struggle to finish in the points, regardless of how good their other characteristics are. That's the COTA reality.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Validation Strategy",
+      subtitle: "How We Measure Success",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Wind Tunnel Program</h3>
+            
+            <div className="space-y-3">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <div className="font-bold text-blue-900 mb-2">Pillar 1: Downforce Consistency</div>
+                <div className="text-sm text-gray-700">
+                  • Speed sweep: 80-280 kph in 20 kph increments<br/>
+                  • Force balance measurements at each speed<br/>
+                  • Front wing pressure mapping via surface taps<br/>
+                  • Target: &lt;5% total downforce variation, ±1.5% balance shift
+                </div>
+              </div>
+
+              <div className="bg-red-50 p-4 rounded-lg">
+                <div className="font-bold text-red-900 mb-2">Pillar 2: Ride Height Robustness</div>
+                <div className="text-sm text-gray-700">
+                  • Ride height sweeps: ±15mm from nominal in 1mm steps<br/>
+                  • Pitch sensitivity: ±1.5° rake variations<br/>
+                  • Floor pressure mapping to identify stall onset<br/>
+                  • Target: &lt;0.8% downforce loss per mm, no stall events
+                </div>
+              </div>
+
+              <div className="bg-gray-100 p-4 rounded-lg">
+                <div className="font-bold text-gray-900 mb-2">Pillar 3: Drag Efficiency</div>
+                <div className="text-sm text-gray-700">
+                  • Yaw sweeps: -15° to +15° in 1° increments<br/>
+                  • L/D calculations at race ride height<br/>
+                  • Rear wing wake rake measurements<br/>
+                  • Target: L/D ≥3.2, stable Cp within ±8° yaw
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border-2 border-gray-300">
+            <h3 className="font-bold text-xl mb-4">CFD Validation</h3>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="space-y-2">
+                <div className="font-bold text-gray-900">Flow Quality Checks</div>
+                <div className="text-gray-700">• Front wing separation mapping</div>
+                <div className="text-gray-700">• Diffuser velocity profiles</div>
+                <div className="text-gray-700">• Floor edge vortex strength</div>
+                <div className="text-gray-700">• Rear wing wake structure</div>
+              </div>
+              <div className="space-y-2">
+                <div className="font-bold text-gray-900">Sensitivity Studies</div>
+                <div className="text-gray-700">• Ride height parametric sweeps</div>
+                <div className="text-gray-700">• Wing angle optimization</div>
+                <div className="text-gray-700">• Crosswind stability analysis</div>
+                <div className="text-gray-700">• Temperature effect on cooling</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-900 text-white p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Track Validation (FP1/FP2)</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-start">
+                <span className="mr-3">✓</span>
+                <span><span className="font-bold">Consistency Check:</span> Sector times across fuel loads (high to low)</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">✓</span>
+                <span><span className="font-bold">Driver Feedback:</span> Predictability scores through different speed corners</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">✓</span>
+                <span><span className="font-bold">Telemetry Analysis:</span> Ride height variations vs downforce consistency</span>
+              </div>
+              <div className="flex items-start">
+                <span className="mr-3">✓</span>
+                <span><span className="font-bold">GPS Comparison:</span> Trap speed vs sector times relative to competition</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Success Metrics Summary",
+      subtitle: "Clear Performance Targets",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-blue-600 text-white p-6 rounded-lg">
+              <div className="text-3xl font-bold mb-2">0.15s</div>
+              <div className="text-sm text-blue-100">Maximum gap to fastest in Sector 1</div>
+              <div className="text-xs text-blue-200 mt-2">Validates downforce consistency</div>
+            </div>
+            
+            <div className="bg-red-600 text-white p-6 rounded-lg">
+              <div className="text-3xl font-bold mb-2">0.05s</div>
+              <div className="text-sm text-red-100">Lap time variation across fuel loads</div>
+              <div className="text-xs text-red-200 mt-2">Validates ride height robustness</div>
+            </div>
+            
+            <div className="bg-gray-700 text-white p-6 rounded-lg">
+              <div className="text-3xl font-bold mb-2">8 kph</div>
+              <div className="text-sm text-gray-100">Maximum trap speed deficit</div>
+              <div className="text-xs text-gray-200 mt-2">Validates drag efficiency</div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border-2 border-gray-300">
+            <h3 className="font-bold text-xl mb-4">Comprehensive Performance Targets</h3>
+            
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b-2 border-gray-300">
+                  <th className="text-left py-3 font-bold">Parameter</th>
+                  <th className="text-center py-3 font-bold">Target</th>
+                  <th className="text-left py-3 font-bold">Measurement Method</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700">
+                <tr className="border-b border-gray-200">
+                  <td className="py-3">Downforce variation (80-280 kph)</td>
+                  <td className="text-center font-bold text-blue-600">&lt;5%</td>
+                  <td>Wind tunnel force balance</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-3">Aero balance shift</td>
+                  <td className="text-center font-bold text-blue-600">±1.5%</td>
+                  <td>CFD + track telemetry</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-3">Downforce loss per 1mm ride height</td>
+                  <td className="text-center font-bold text-red-600">&lt;0.8%</td>
+                  <td>Wind tunnel ride height sweep</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-3">Operational heave range</td>
+                  <td className="text-center font-bold text-red-600">8-12mm</td>
+                  <td>Track telemetry analysis</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-3">Lift-to-drag ratio</td>
+                  <td className="text-center font-bold text-gray-700">≥3.2</td>
+                  <td>Wind tunnel + CFD validation</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-3">Back straight trap speed</td>
+                  <td className="text-center font-bold text-gray-700">320+ kph</td>
+                  <td>GPS speed trap data</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="py-3">Rear stability yaw range</td>
+                  <td className="text-center font-bold text-gray-700">±8°</td>
+                  <td>Wind tunnel yaw sweep</td>
+                </tr>
+                <tr>
+                  <td className="py-3">Cooling drag percentage</td>
+                  <td className="text-center font-bold text-gray-700">&lt;8%</td>
+                  <td>CFD pressure analysis</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+            <h4 className="font-bold text-lg mb-2 text-green-900">Ultimate Success Criterion</h4>
+            <p className="text-gray-700">
+              Competitive lap time across all three sectors with consistent performance from high to low fuel. Driver confidence score ≥8/10 across all track sections. No compromises forced by aerodynamic limitations.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Implementation Timeline",
+      subtitle: "Development to Track",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Pre-Event Program</h3>
+            
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded-lg border-l-4 border-blue-600">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="font-bold text-lg">Week -8 to -6</div>
+                  <div className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded">CFD Phase</div>
+                </div>
+                <div className="text-sm text-gray-700">
+                  • Complete CFD sensitivity studies on all three pillars<br/>
+                  • Identify optimal ride height window and wing angles<br/>
+                  • Predict performance across COTA speed range<br/>
+                  • Design validation: confirm targets are achievable
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-red-600">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="font-bold text-lg">Week -5 to -3</div>
+                  <div className="text-sm bg-red-100 text-red-800 px-3 py-1 rounded">Wind Tunnel</div>
+                </div>
+                <div className="text-sm text-gray-700">
+                  • Full ride height sweep program<br/>
+                  • Speed range validation (downforce consistency)<br/>
+                  • Yaw stability testing<br/>
+                  • Wing angle optimization runs
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-green-600">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="font-bold text-lg">Week -2</div>
+                  <div className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded">Final Prep</div>
+                </div>
+                <div className="text-sm text-gray-700">
+                  • Manufacturing of final specification parts<br/>
+                  • Setup simulation using validated aero data<br/>
+                  • Strategy scenarios based on drag efficiency predictions<br/>
+                  • Driver briefings on expected characteristics
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-900 text-white p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Track Weekend Program</h3>
+            
+            <div className="space-y-4">
+              <div>
+                <div className="font-bold mb-2 text-lg">FP1 - Validation Phase</div>
+                <div className="text-sm text-blue-100">
+                  • Baseline aero configuration at predicted optimal ride height<br/>
+                  • Install full sensor suite: ride height, aero balance, tire temps<br/>
+                  • Focus: confirm wind tunnel predictions correlate to track<br/>
+                  • Key check: ride height behavior through Turn 1, 9, and final sector
+                </div>
+              </div>
+
+              <div>
+                <div className="font-bold mb-2 text-lg">FP2 - Optimization Phase</div>
+                <div className="text-sm text-blue-100">
+                  • Front wing angle variations (±1°)<br/>
+                  • Ride height fine-tuning if needed<br/>
+                  • Long run simulation on high fuel to validate robustness<br/>
+                  • Compare trap speeds vs competition
+                </div>
+              </div>
+
+              <div>
+                <div className="font-bold mb-2 text-lg">FP3 - Race Simulation</div>
+                <div className="text-sm text-blue-100">
+                  • Lock in final configuration<br/>
+                  • Qualify simulation runs<br/>
+                  • Confirm consistency across tire compounds<br/>
+                  • Final driver confidence check
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+            <p className="text-sm text-gray-700">
+              <span className="font-bold text-yellow-900">Critical Decision Point:</span> End of FP2. If any pillar is not meeting targets, we must understand why and decide: adjust setup, accept compromise, or emergency package development if fundamental issue discovered.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Risk Assessment",
+      subtitle: "Potential Failure Modes",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-red-50 p-6 rounded-lg border-2 border-red-600">
+            <h3 className="font-bold text-xl mb-4 text-red-900">High-Risk Scenarios</h3>
+            
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold text-red-900 mb-2">Floor Porpoising at Race Fuel</div>
+                <div className="text-sm text-gray-700 mb-2">
+                  Wind tunnel tested at mid-fuel load, but race starts heavy. Floor stalls at low ride height causing oscillation.
+                </div>
+                <div className="text-xs bg-red-50 p-2 rounded">
+                  <span className="font-bold">Mitigation:</span> Must test full fuel load ride height in FP1. Have +2mm ride height setup ready as contingency.
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold text-red-900 mb-2">Unexpected Wind Conditions</div>
+                <div className="text-sm text-gray-700 mb-2">
+                  Strong crosswinds exceed ±8° yaw testing range. Rear becomes unstable on back straight affecting driver confidence.
+                </div>
+                <div className="text-xs bg-red-50 p-2 rounded">
+                  <span className="font-bold">Mitigation:</span> Have rear wing gurney flap addition ready (+5mm) to stabilize rear at cost of 3-4 kph.
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold text-red-900 mb-2">Surface Degradation Worse Than Expected</div>
+                <div className="text-sm text-gray-700 mb-2">
+                  Bumps in Turn 1 and Turn 9 more severe than simulation data. Ride height window insufficient.
+                </div>
+                <div className="text-xs bg-red-50 p-2 rounded">
+                  <span className="font-bold">Mitigation:</span> Soften front suspension compliance, accept small aero platform loss for mechanical stability.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 p-6 rounded-lg border-2 border-yellow-600">
+            <h3 className="font-bold text-xl mb-4 text-yellow-900">Medium-Risk Scenarios</h3>
+            
+            <div className="space-y-3 text-sm">
+              <div className="bg-white p-3 rounded">
+                <div className="font-bold mb-1">Cooling Insufficient at Race Pace</div>
+                <div className="text-gray-700">Open additional bodywork → increases drag → trap speed penalty</div>
+              </div>
+              
+              <div className="bg-white p-3 rounded">
+                <div className="font-bold mb-1">Tire Wake Different Than Predicted</div>
+                <div className="text-gray-700">Rear wing efficiency lower than wind tunnel → lose downforce or add wing angle (more drag)</div>
+              </div>
+              
+              <div className="bg-white p-3 rounded">
+                <div className="font-bold mb-1">Balance Shift with Tire Degradation</div>
+                <div className="text-gray-700">Mechanical grip loss changes optimal aero balance → may need wing adjustment mid-stint</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-900 text-white p-6 rounded-lg">
+            <h3 className="font-bold text-lg mb-3">Contingency Parts Required</h3>
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div>
+                <div className="font-bold text-blue-200 mb-2">Ride Height Solutions</div>
+                <div>• +2mm floor spacers</div>
+                <div>• Alternative suspension springs</div>
+                <div>• Adjustable anti-roll bars</div>
+              </div>
+              <div>
+                <div className="font-bold text-blue-200 mb-2">Aero Balance Options</div>
+                <div>• ±2° front wing angles</div>
+                <div>• Rear wing gurney options</div>
+                <div>• Alternative beam wing spec</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Competitive Benchmarking",
+      subtitle: "Understanding the Field",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Expected Competitor Approaches</h3>
+            
+            <div className="space-y-4">
+              <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+                <div className="font-bold text-lg mb-2 text-blue-900">High-Downforce Teams</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  Teams with excellent ride height robustness and efficient floors will run maximum downforce. Expect them to dominate Sector 1 by 0.2-0.3s but lose 10-12 kph on the straight.
+                </div>
+                <div className="text-xs bg-blue-100 p-2 rounded">
+                  <span className="font-bold">Our Strategy:</span> Must be within 0.15s in S1 while maintaining trap speed advantage for passing opportunities.
+                </div>
+              </div>
+
+              <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-600">
+                <div className="font-bold text-lg mb-2 text-red-900">Low-Drag Teams</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  Teams with ride height sensitivity issues or poor high-speed balance will strip wing. Fastest trap speeds but vulnerable in S1 and final sector technical sections.
+                </div>
+                <div className="text-xs bg-red-100 p-2 rounded">
+                  <span className="font-bold">Our Strategy:</span> Defend into Turn 1 and Turn 12, don't get drawn into straight-line battles.
+                </div>
+              </div>
+
+              <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-600">
+                <div className="font-bold text-lg mb-2 text-green-900">Balanced Teams (Our Target)</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  Teams that nail all three pillars. Competitive everywhere, no obvious weaknesses. Consistent race pace, flexible strategy, strong qualifying.
+                </div>
+                <div className="text-xs bg-green-100 p-2 rounded">
+                  <span className="font-bold">Success:</span> Top 3 in S1, within 8 kph trap speed, fastest average lap time over race distance.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg border-2 border-gray-300">
+            <h3 className="font-bold text-xl mb-4">Key Telemetry Indicators</h3>
+            <div className="text-sm text-gray-700 space-y-2">
+              <div className="flex items-start">
+                <span className="font-bold mr-3 text-blue-600">S1 Micro-sectors:</span>
+                <span>If losing time in T3-6 (high-speed esses), downforce consistency issue. If losing in T1 braking, ride height sensitivity on bumps.</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-bold mr-3 text-red-600">Ride Height Trace:</span>
+                <span>Watch for oscillations or sudden drops through bumpy sections. Correlate with driver comments on unpredictability.</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-bold mr-3 text-gray-700">Speed Trace Delta:</span>
+                <span>Compare our acceleration out of T11 vs competitors. If they pull away immediately, they have better low-speed platform.</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-bold mr-3 text-green-600">Trap Speed Pattern:</span>
+                <span>If trap speed improves as fuel burns off, we have good efficiency. If it stays flat or worsens, ride height sensitivity issue.</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-800 text-white p-6 rounded-lg">
+            <h4 className="font-bold text-lg mb-3">GPS Comparison Priorities</h4>
+            <div className="text-sm space-y-2">
+              <div>1. <span className="font-bold">Turn 3-6 speed overlay:</span> Direct measure of high-speed downforce consistency</div>
+              <div>2. <span className="font-bold">Turn 11 exit to T12 entry:</span> Low-speed platform and acceleration efficiency</div>
+              <div>3. <span className="font-bold">Turn 19-20 stability:</span> Final high-speed test of complete package</div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Decision Framework",
+      subtitle: "When Compromises Are Necessary",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-red-50 p-6 rounded-lg border-2 border-red-600">
+            <h3 className="font-bold text-xl mb-4 text-red-900">If Ride Height Robustness Fails</h3>
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold mb-2">Symptom: Porpoising or unpredictable behavior</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  <span className="font-bold">Decision:</span> Raise ride height immediately, accept 2-3% downforce loss everywhere. Cannot race an unpredictable car.
+                </div>
+                <div className="text-xs bg-red-50 p-2 rounded">
+                  Impact: Lose 0.3-0.4s per lap but finish the race. Unpredictable car costs more and risks DNF.
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold mb-2">Symptom: Excessive plank wear in practice</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  <span className="font-bold">Decision:</span> Raise 1-2mm, optimize wing angles to recover some downforce. Disqualification for plank wear is unacceptable risk.
+                </div>
+                <div className="text-xs bg-red-50 p-2 rounded">
+                  Impact: Small performance loss but guaranteed legal car at race end.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-600">
+            <h3 className="font-bold text-xl mb-4 text-blue-900">If Downforce Consistency Issues</h3>
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold mb-2">Symptom: Understeer in slow corners, oversteer in fast</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  <span className="font-bold">Decision:</span> Adjust wing angles to optimize for driver confidence in most critical corners (prioritize Sector 1).
+                </div>
+                <div className="text-xs bg-blue-50 p-2 rounded">
+                  Impact: Accept slightly suboptimal balance in less critical sections for overall consistency.
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold mb-2">Symptom: Front wing stalling at low speeds</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  <span className="font-bold">Decision:</span> Reduce front wing angle, add rear wing to maintain balance. Sacrifice some peak downforce for consistency.
+                </div>
+                <div className="text-xs bg-blue-50 p-2 rounded">
+                  Impact: Lower absolute downforce but more predictable platform. Driver confidence improves, lap times may actually improve.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-100 p-6 rounded-lg border-2 border-gray-600">
+            <h3 className="font-bold text-xl mb-4 text-gray-900">If Drag Efficiency Issues</h3>
+            <div className="space-y-3">
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold mb-2">Symptom: 12+ kph trap speed deficit</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  <span className="font-bold">Decision:</span> Reduce rear wing angle by 1-2°. Must protect against DRS trains and strategic vulnerability.
+                </div>
+                <div className="text-xs bg-gray-50 p-2 rounded">
+                  Impact: Lose 0.1-0.15s in Sector 1, gain 5-7 kph trap speed. Net benefit in race due to passing/defending capability.
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg">
+                <div className="font-bold mb-2">Symptom: Rear instability in crosswinds</div>
+                <div className="text-sm text-gray-700 mb-3">
+                  <span className="font-bold">Decision:</span> Add small gurney flap (+3-5mm) to rear wing. Prioritize driver confidence over absolute drag.
+                </div>
+                <div className="text-xs bg-gray-50 p-2 rounded">
+                  Impact: Lose 2-3 kph but car becomes raceable in all conditions. Safety and consistency trump marginal speed gain.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-600 mt-6">
+            <h4 className="font-bold text-yellow-900 mb-2">Golden Rule</h4>
+            <p className="text-gray-700 text-sm">
+              Never compromise on safety or legality. Between the three pillars, ride height robustness is non-negotiable. Between consistency and efficiency, always choose consistency - a predictable slower car beats an unpredictable fast car over race distance.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Communication Strategy",
+      subtitle: "Keeping Everyone Aligned",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-blue-900 text-white p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Driver Briefing - Key Messages</h3>
+            <div className="space-y-3 text-sm">
+              <div className="bg-blue-800 p-3 rounded">
+                <div className="font-bold mb-1">What to Expect</div>
+                <div className="text-blue-100">
+                  "The car should feel planted through Turn 1 and the high-speed esses. If you feel inconsistency between laps, especially on bumps, tell us immediately - that's our priority fix."
+                </div>
+              </div>
+              <div className="bg-blue-800 p-3 rounded">
+                <div className="font-bold mb-1">What We Need From You</div>
+                <div className="text-blue-100">
+                  "Rate predictability 1-10 in three zones: high-speed Sector 1, slow corners (T11, T15), and bumpy sections. We need this every session to validate our aero platform."
+                </div>
+              </div>
+              <div className="bg-blue-800 p-3 rounded">
+                <div className="font-bold mb-1">Trade-offs</div>
+                <div className="text-blue-100">
+                  "We may not be fastest on the back straight, but you should be confident defending into Turn 1 and attacking into Turn 12. Our philosophy is balanced performance, not peak in one area."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Engineering Debrief Structure</h3>
+            <div className="space-y-4">
+              <div className="bg-white p-4 rounded-lg border-l-4 border-blue-600">
+                <div className="font-bold mb-2">Post-FP1 (30 minutes)</div>
+                <div className="text-sm text-gray-700">
+                  1. Validate ride height: any floor strikes, porpoising, or plank wear concerns?<br/>
+                  2. Driver confidence scores: does real-world match predictions?<br/>
+                  3. Telemetry correlation: ride height behavior vs downforce consistency<br/>
+                  4. Go/no-go decision: is baseline philosophy correct or do we need major changes?
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-red-600">
+                <div className="font-bold mb-2">Post-FP2 (45 minutes)</div>
+                <div className="text-sm text-gray-700">
+                  1. Long run analysis: performance degradation with fuel burn-off<br/>
+                  2. Competitive benchmarking: where are we losing/gaining vs top 3?<br/>
+                  3. Setup optimization: wing angles, ride height fine-tuning<br/>
+                  4. Lock in race configuration or continue development in FP3?
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-lg border-l-4 border-green-600">
+                <div className="font-bold mb-2">Post-FP3 (20 minutes)</div>
+                <div className="text-sm text-gray-700">
+                  1. Final configuration confirmation<br/>
+                  2. Qualifying strategy: one-lap vs race setup compromise<br/>
+                  3. Weather/wind forecast: any last-minute adjustments needed?<br/>
+                  4. Contingency plans: what changes can we make during race if needed?
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-600">
+            <h4 className="font-bold mb-2">Team Principal Updates</h4>
+            <p className="text-sm text-gray-700">
+              After each session, provide three-line summary: (1) Are all three pillars performing to target? (2) What is our competitive position? (3) Any risks or concerns? Keep it concise and actionable.
+            </p>
+          </div>
+        </div>
+      )
+    },
+    {
+      title: "Summary & Action Items",
+      subtitle: "Executive Overview",
+      type: "content",
+      content: (
+        <div className="space-y-6">
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-8 rounded-lg">
+            <h3 className="font-bold text-3xl mb-6">Three Pillars for COTA Success</h3>
+            
+            <div className="space-y-4">
+              <div className="flex items-start space-x-4">
+                <div className="bg-red-600 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 text-xl font-bold">1</div>
+                <div>
+                  <div className="font-bold text-xl">Ride Height Robustness</div>
+                  <div className="text-gray-300 text-sm">Floor must work across 8-12mm heave range without stalling. Non-negotiable for COTA's bumps.</div>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-blue-600 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 text-xl font-bold">2</div>
+                <div>
+                  <div className="font-bold text-xl">Downforce Consistency</div>
+                  <div className="text-gray-300 text-sm">Platform stable from 80-280 kph with minimal balance shift. Critical for driver confidence.</div>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="bg-gray-600 rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 text-xl font-bold">3</div>
+                <div>
+                  <div className="font-bold text-xl">Drag Efficiency</div>
+                  <div className="text-gray-300 text-sm">L/D ≥3.2 enabling balanced performance without strategic compromises.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-green-50 p-6 rounded-lg border-2 border-green-600">
+              <h4 className="font-bold text-lg mb-3 text-green-900">Success Looks Like</h4>
+              <div className="space-y-2 text-sm text-gray-700">
+                <div>✓ Sector 1 within 0.15s of fastest</div>
+                <div>✓ Trap speed within 8 kph of fastest</div>
+                <div>✓ Consistent times across fuel loads</div>
+                <div>✓ Driver confidence ≥8/10</div>
+                <div>✓ No plank wear concerns</div>
+                <div>✓ Flexible race strategy options</div>
+              </div>
+            </div>
+
+            <div className="bg-red-50 p-6 rounded-lg border-2 border-red-600">
+              <h4 className="font-bold text-lg mb-3 text-red-900">Failure Modes to Avoid</h4>
+              <div className="space-y-2 text-sm text-gray-700">
+                <div>✗ Porpoising or floor strikes</div>
+                <div>✗ Unpredictable handling</div>
+                <div>✗ Excessive trap speed deficit</div>
+                <div>✗ Performance degradation with fuel</div>
+                <div>✗ Plank wear illegality</div>
+                <div>✗ Driver confidence issues</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-900 text-white p-6 rounded-lg">
+            <h3 className="font-bold text-xl mb-4">Immediate Action Items</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-start">
+                <div className="bg-blue-700 rounded px-3 py-1 mr-3 text-xs font-bold">WEEK -6</div>
+                <div>Complete CFD sensitivity studies for all three pillars. Present findings to aero team.</div>
+              </div>
+              <div className="flex items-start">
+                <div className="bg-blue-700 rounded px-3 py-1 mr-3 text-xs font-bold">WEEK -4</div>
+                <div>Wind tunnel validation program. Confirm targets are achievable with current package.</div>
+              </div>
+              <div className="flex items-start">
+                <div className="bg-blue-700 rounded px-3 py-1 mr-3 text-xs font-bold">WEEK -2</div>
+                <div>Manufacturing contingency parts. Brief driver on expected characteristics and feedback needs.</div>
+              </div>
+              <div className="flex items-start">
+                <div className="bg-blue-700 rounded px-3 py-1 mr-3 text-xs font-bold">FP1</div>
+                <div>Validate baseline. Critical ride height assessment through Turn 1 and Turn 9 bumps.</div>
+              </div>
+              <div className="flex items-start">
+                <div className="bg-blue-700 rounded px-3 py-1 mr-3 text-xs font-bold">FP2</div>
+                <div>Optimization phase. Lock in race configuration if all targets met. Identify any required compromises.</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-8 rounded-lg text-center">
+            <div className="text-3xl font-bold mb-3">Clear Targets. Measurable Outcomes.</div>
+            <div className="text-xl text-green-100">Execute the plan. Win on Sunday.</div>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  const nextSlide = () => {
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Slide Counter */}
+        <div className="text-white text-sm mb-4 flex justify-between items-center">
+          <div>Slide {currentSlide + 1} of {slides.length}</div>
+          <div className="text-gray-400">{slides[currentSlide].title}</div>
+        </div>
+
+        {/* Main Slide */}
+        <div className="bg-white rounded-2xl shadow-2xl p-12 min-h-[600px] flex flex-col">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              {slides[currentSlide].title}
+            </h1>
+            <div className="text-xl text-gray-500">
+              {slides[currentSlide].subtitle}
+            </div>
+          </div>
+
+          <div className="flex-1">
+            {slides[currentSlide].content}
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex justify-between items-center mt-6">
+          <button
+            onClick={prevSlide}
+            disabled={currentSlide === 0}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-bold transition-all ${
+              currentSlide === 0
+                ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                : 'bg-red-600 text-white hover:bg-red-700'
+            }`}
+          >
+            <ChevronLeft size={20} />
+            <span>Previous</span>
+          </button>
+
+          <div className="flex space-x-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  index === currentSlide
+                    ? 'bg-red-600 w-8'
+                    : 'bg-gray-600 hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={nextSlide}
+            disabled={currentSlide === slides.length - 1}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-bold transition-all ${
+              currentSlide === slides.length - 1
+                ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                : 'bg-red-600 text-white hover:bg-red-700'
+            }`}
+          >
+            <span>Next</span>
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        {/* Quick Jump */}
+        <div className="mt-6 text-center text-gray-400 text-sm">
+          Use dot navigation or arrow keys to jump between slides
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AeroDeck;
